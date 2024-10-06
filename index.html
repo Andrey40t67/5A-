@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра Андрея Пашкевича</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff7f50, #6a5acd, #00bfff, #ff69b4);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            color: #fff;
+            transition: opacity 0.5s ease;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff6347;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #ff4500;
+        }
+
+        iframe {
+            display: none; /* Скрываем видео по умолчанию */
+            width: 560px;
+            height: 315px;
+            border: none;
+            margin-top: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="main-menu">
+        <h1>Игра Андрея Пашкевича</h1>
+        <button onclick="startGame()">Начать</button>
+        <button onclick="openSettings()">Настройки</button>
+        <button onclick="openInstructions()">Инструкция</button>
+        <button onclick="openAbout()">Обо мне</button>
+    </div>
+
+    <div class="container hidden" id="settings">
+        <h2>Настройки</h2>
+        <p>Здесь вы можете изменить фон, шрифт и тему.</p>
+        <button onclick="applySettings()">Сохранить настройки</button>
+        <button onclick="goBack()">Назад</button>
+    </div>
+
+    <div class="container hidden" id="instructions">
+        <h2>Инструкция</h2>
+        <p>Это игра, в которой вы можете...</p>
+        <iframe id="video" src="https://www.youtube.com/embed/f6CHhQt3Mp8" allowfullscreen></iframe>
+        <button onclick="toggleVideo()">Посмотреть видео</button>
+        <button onclick="goBack()">Назад</button>
+    </div>
+
+    <div class="container hidden" id="about">
+        <h2>Обо мне</h2>
+        <p>Я, Андрей Пашкевич, создал этот сайт для нашего класса 5А. Все это было сделано мной самостоятельно!</p>
+        <button onclick="goBack()">Назад</button>
+    </div>
+
+    <script>
+        function startGame() {
+            // Здесь можно вставить код для начала игры
+            alert('Игра начинается!');
+        }
+
+        function openSettings() {
+            transitionTo('settings');
+        }
+
+        function openInstructions() {
+            transitionTo('instructions');
+        }
+
+        function openAbout() {
+            transitionTo('about');
+        }
+
+        function goBack() {
+            const currentVisible = document.querySelector('.container:not(.hidden)');
+            if (currentVisible) {
+                currentVisible.classList.add('hidden');
+            }
+            document.getElementById('main-menu').classList.remove('hidden');
+        }
+
+        function transitionTo(section) {
+            const currentVisible = document.querySelector('.container:not(.hidden)');
+            if (currentVisible) {
+                currentVisible.classList.add('hidden');
+            }
+            document.getElementById(section).classList.remove('hidden');
+        }
+
+        function toggleVideo() {
+            const video = document.getElementById('video');
+            if (video.style.display === 'none') {
+                video.style.display = 'block';
+            } else {
+                video.style.display = 'none';
+            }
+        }
+
+        function applySettings() {
+            // Здесь можно добавить код для изменения настроек
+            alert('Настройки сохранены!');
+        }
+    </script>
+</body>
+</html>
